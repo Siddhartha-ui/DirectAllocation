@@ -1,0 +1,7 @@
+duckdb==0.8.1
+pandas==2.0.3
+pyarrow==9.0.0
+openpyxl==3.0.10
+streamlit==1.31.0
+streamlit-option-menu==0.3.2
+
