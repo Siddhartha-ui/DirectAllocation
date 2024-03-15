@@ -32,4 +32,7 @@ class Session(object):
                 st.session_state.df_on = None    
 
         if "df_off" not in st.session_state :
-                st.session_state.df_off = None 
+                st.session_state.df_off = None
+                
+        if "user_id_rnd" not in st.session_state :
+            st.session_state.user_id_rnd = ""         
