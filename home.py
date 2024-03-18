@@ -325,13 +325,16 @@ if selected == "Allocation upload" :
        upd = Upload("",st.session_state.user_name,GetCurrentdate(),customfilename= datasetname)
        path_pq = upd.GetParquetFolder(datasetname)
        parquet_path = Path(path_pq)
+       st.write(path_pq)
+       st.write(parquet_path)
+
          
        pq_file_name = []
             
        for i, parquet_path in enumerate(parquet_path.glob('*.parquet')):
-                st.write(parquet_path)
+                
                 df = upd.ReadParquetFile(parquet_path)
-                st.data_editor(df,key= str(i))
+                
                 data_set = sorted(df["sheet_name"].unique())
                 if data_set[0] == "PL" :
                    #st.session_state.PLDF = df
