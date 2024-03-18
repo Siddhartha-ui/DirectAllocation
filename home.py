@@ -151,8 +151,8 @@ if selected == "Sign-Up" :
     
 
 def IsTransactionExists(s_path: str, s_pl = "PL.parquet", s_tr  = "TrancheData.parquet") -> bool:
-    pl_file = s_path + s_pl
-    tr_file = s_path + s_tr
+    pl_file = s_path + "//" + s_pl
+    tr_file = s_path + "//" + s_tr
     exist = os.path.isfile(pl_file) and os.path.isfile(tr_file)
     return exist
 
@@ -332,8 +332,9 @@ if selected == "Allocation upload" :
        pq_file_name = []
             
        for i, parquet_path in enumerate(parquet_path.glob('*.parquet')):
-                
+                st.write(parquet_path)
                 df = upd.ReadParquetFile(parquet_path)
+                
                 
                 data_set = sorted(df["sheet_name"].unique())
                 if data_set[0] == "PL" :

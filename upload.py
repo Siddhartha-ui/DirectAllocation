@@ -18,9 +18,9 @@ class Upload(object) :
     
     def __GetParquetFolder(self, subfolder : str) -> str:
         if len(self.calcforder) == 0 :
-            parquet_dir = self.directory_parquet + "\\" + subfolder + "\\"
+            parquet_dir = self.directory_parquet + "\\" + subfolder ##+ "\\"
         else :
-            parquet_dir = self.directory_parquet + "\\" + subfolder + "\\" + str(self.calcforder) + "\\"    
+            parquet_dir = self.directory_parquet + "\\" + subfolder + "\\" + str(self.calcforder) ##+ "\\"    
         os.makedirs(parquet_dir,exist_ok=True)
         return parquet_dir
 
@@ -35,7 +35,7 @@ class Upload(object) :
     
     def uploadcalculatedAllocation(self, df : pd.DataFrame,folder_name : str,file_name: str) -> str :
         dir_name = self.__GetParquetFolder(folder_name)
-        filename = dir_name + file_name + ".parquet"
+        filename = dir_name + "\\" + file_name + ".parquet"
         df.to_parquet(filename,engine= 'pyarrow')
     
     def ReadParquetFile(self, file_name : str) -> pd.DataFrame :
