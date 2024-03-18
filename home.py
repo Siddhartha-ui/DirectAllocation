@@ -329,8 +329,9 @@ if selected == "Allocation upload" :
        pq_file_name = []
             
        for i, parquet_path in enumerate(parquet_path.glob('*.parquet')):
-                
+                st.write(parquet_path)
                 df = upd.ReadParquetFile(parquet_path)
+                st.data_editor(df,key= str(i))
                 data_set = sorted(df["sheet_name"].unique())
                 if data_set[0] == "PL" :
                    #st.session_state.PLDF = df
@@ -348,7 +349,7 @@ if selected == "Allocation upload" :
            upd_calc.uploadcalculatedAllocation(df,datasetname,file_name)
            
 
-       selected_data = st.multiselect("DATA SETS", options=pq_file_name, default= pq_file_name, disabled= True)
+       selected_data = st.multiselect("DATA SETS", options=pq_file_name, default= pq_file_name)
          
        if b_show :
         for i in selected_data :
