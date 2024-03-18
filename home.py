@@ -330,24 +330,28 @@ if selected == "Allocation upload" :
 
          
        pq_file_name = []
-            
-       for i, parquet_path in enumerate(parquet_path.glob('*.parquet')):
-                st.write(parquet_path)
-                df = upd.ReadParquetFile(parquet_path)
-                
-                
-                data_set = sorted(df["sheet_name"].unique())
-                if data_set[0] == "PL" :
-                   #st.session_state.PLDF = df
-                   st.session_state.PLDFALL = df
-                else :
-                   #st.session_state.TranchDF = df
-                   st.session_state.TranchDFALL = df
-                #pq_file_name.append(data_set)
-                pq_file_name.extend(data_set)
+       ext = ".parquet" 
 
-       def PrepareAllocatedData(df_t : pd.DataFrame, df_pl : pd.DataFrame, file_name : str, parquet_path = ""):
-           alloc = Allocation(df_t,df_pl,parquet_path)
+       for files in os.listdir(path_pq) :
+
+       #for i, parquet_path in enumerate(parquet_path.glob('*.parquet')):
+                if files.endswith(ext) :         
+                    
+                    parquet_file_path =  path_pq + "\\" + files
+                    df = upd.ReadParquetFile(parquet_file_path)
+                    
+                    data_set = sorted(df["sheet_name"].unique())
+                    if data_set[0] == "PL" :
+                    #st.session_state.PLDF = df
+                        st.session_state.PLDFALL = df
+                    else :
+                    #st.session_state.TranchDF = df
+                        st.session_state.TranchDFALL = df
+                    #pq_file_name.append(data_set)
+                    pq_file_name.extend(data_set)
+
+       def PrepareAllocatedData(df_t : pd.DataFrame, df_pl : pd.DataFrame, file_name : str, path_pq = ""):
+           alloc = Allocation(df_t,df_pl,path_pq)
            df = alloc.PLAllocation()
            upd_calc = Upload("",st.session_state.user_name,"","","CALC")
            upd_calc.uploadcalculatedAllocation(df,datasetname,file_name)
