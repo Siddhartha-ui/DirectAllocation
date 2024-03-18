@@ -14,13 +14,13 @@ class Upload(object) :
          self.date = date
          self.customfilename = customfilename
          self.calcforder = calcforder
-         self.directory_parquet = os.getcwd() + "\\parquet\\" + str(self.dbop.user) + "\\"
+         self.directory_parquet = os.getcwd() + "//parquet//" + str(self.dbop.user) 
     
     def __GetParquetFolder(self, subfolder : str) -> str:
         if len(self.calcforder) == 0 :
-            parquet_dir = self.directory_parquet + "\\" + subfolder ##+ "\\"
+            parquet_dir = self.directory_parquet + "//" + subfolder ##+ "\\"
         else :
-            parquet_dir = self.directory_parquet + "\\" + subfolder + "\\" + str(self.calcforder) ##+ "\\"    
+            parquet_dir = self.directory_parquet + "//" + subfolder + "//" + str(self.calcforder) ##+ "\\"    
         os.makedirs(parquet_dir,exist_ok=True)
         return parquet_dir
 
@@ -35,7 +35,7 @@ class Upload(object) :
     
     def uploadcalculatedAllocation(self, df : pd.DataFrame,folder_name : str,file_name: str) -> str :
         dir_name = self.__GetParquetFolder(folder_name)
-        filename = dir_name + "\\" + file_name + ".parquet"
+        filename = dir_name + "//" + file_name + ".parquet"
         df.to_parquet(filename,engine= 'pyarrow')
     
     def ReadParquetFile(self, file_name : str) -> pd.DataFrame :
@@ -63,7 +63,7 @@ class Upload(object) :
                 sheet_f.columns = sheet_f.columns.str.replace(' ','')
                 dataset_name = str(sheets)
                 dataset_name = dataset_name.replace(' ','')
-                parquet_dir = self.directory_parquet + "\\" + fileNM + "\\"
+                parquet_dir = self.directory_parquet + "//" + fileNM + "//"
                 os.makedirs(parquet_dir,exist_ok=True)
                 partition_col_name = "sheet_name"
                 partition_col_value = str(dataset_name) 
@@ -71,7 +71,8 @@ class Upload(object) :
                 sheet_f[partition_col_name] = partition_col_value
                 parquet_file_name = parquet_dir + dataset_name + ".parquet"
                 sheet_f.to_parquet(parquet_file_name,engine= 'pyarrow')
-                st.write(parquet_file_name)
+                
+                
                 
                 #parquet.write_to_dataset(table=table, root_path=parquet_filename,  partition_cols= [partition_col_name], existing_data_behavior = 'delete_matching')
                 
