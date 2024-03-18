@@ -235,7 +235,7 @@ def preparereport(s_upload: Upload, selected_outputpath : str, selected_report :
                     st.data_editor(df.head(100), key= "1", use_container_width=True, hide_index= True)
                 else:     
                  
-                    types_options = ["ALL", "Maaster", "Onshore" , "Offshore" , "Total" ]
+                    types_options = ["ALL", "Master", "Onshore" , "Offshore" , "Total" ]
                     select_type = st.selectbox("Choose Type", options= types_options)
                     df = alloc_rpt.CombinedDetailPivot(st.session_state.df_m, st.session_state.df_on, st.session_state.df_off, select_type)
                     df = filterDataActivity(df,0)
