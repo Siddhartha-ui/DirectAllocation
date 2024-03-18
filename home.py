@@ -201,7 +201,7 @@ def filterDataActivity(df : pd.DataFrame, isdetail = 1) :
     return df_filterd    
 
 def preparereport(s_upload: Upload, selected_outputpath : str, selected_report : str):
-    s_calcfolder = s_upload.basefolder() + selected_outputpath + "\\" + s_upload.calcforder + "\\"
+    s_calcfolder = s_upload.basefolder() + "//" + selected_outputpath + "//" + s_upload.calcforder + "//"
     parquet_path_calc = Path(s_calcfolder)
     
     if os.path.isdir(parquet_path_calc) :
@@ -325,9 +325,6 @@ if selected == "Allocation upload" :
        upd = Upload("",st.session_state.user_name,GetCurrentdate(),customfilename= datasetname)
        path_pq = upd.GetParquetFolder(datasetname)
        parquet_path = Path(path_pq)
-       st.write(path_pq)
-       st.write(parquet_path)
-
          
        pq_file_name = []
        ext = ".parquet" 
@@ -357,7 +354,7 @@ if selected == "Allocation upload" :
            upd_calc.uploadcalculatedAllocation(df,datasetname,file_name)
            
 
-       selected_data = st.multiselect("DATA SETS", options=pq_file_name, default= pq_file_name)
+       selected_data = st.multiselect("DATA SETS", options=pq_file_name, default= pq_file_name, disabled= True)
          
        if b_show :
         for i in selected_data :
