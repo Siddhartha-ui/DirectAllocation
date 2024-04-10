@@ -334,7 +334,7 @@ if selected == "Allocation upload" :
        #for i, parquet_path in enumerate(parquet_path.glob('*.parquet')):
                 if files.endswith(ext) :         
                     
-                    parquet_file_path =  path_pq + "\\" + files
+                    parquet_file_path =  path_pq + "//" + files
                     df = upd.ReadParquetFile(parquet_file_path)
                     st.write(parquet_file_path)
                     data_set = sorted(df["sheet_name"].unique())
