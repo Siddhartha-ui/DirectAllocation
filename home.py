@@ -336,7 +336,6 @@ if selected == "Allocation upload" :
                     
                     parquet_file_path =  path_pq + "//" + files
                     df = upd.ReadParquetFile(parquet_file_path)
-                    st.write(parquet_file_path)
                     data_set = sorted(df["sheet_name"].unique())
                     if data_set[0] == "PL" :
                     #st.session_state.PLDF = df
