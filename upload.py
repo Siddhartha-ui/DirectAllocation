@@ -71,7 +71,7 @@ class Upload(object) :
                 sheet_f[partition_col_name] = partition_col_value
                 parquet_file_name = parquet_dir + dataset_name + ".parquet"
                 sheet_f.to_parquet(parquet_file_name,engine= 'pyarrow')
-                st.write(parquet_file_name)
+                
                 
                 
                 
